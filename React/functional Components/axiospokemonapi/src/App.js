@@ -9,7 +9,8 @@ function App() {
    
   const [names, setNames] = useState([]);
 const showNames = () =>{
-  axios.get("https://pokeapi.co/api/v2/pokemon?offset=807&limit=311").then(response => setNames(response.data.results))
+  axios.get("https://pokeapi.co/api/v2/pokemon?offset=807&limit=311")
+  .then(response => setNames(response.data.results))
 
 }
 
