@@ -1,0 +1,251 @@
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> use my_first_db
+switched to db my_first_db
+> db
+my_first_db
+> db.dropDatabase()
+{ "ok" : 1 }
+> use my_first_db
+switched to db my_first_db
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> db
+my_first_db
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> db.createCollection("students")
+{ "ok" : 1 }
+> db.students.insert({name: Alaa, home_state: Nablus, lucky_number:13, birthday: {month: 3, day: 25, year: 1995}})
+uncaught exception: ReferenceError: Alaa is not defined :
+@(shell):1:21
+> db.students.insert({name:" Alaa, home_state: Nablus, lucky_number:13, birthday: {month: 3, day: 25, year: 1995}})
+uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shell):1:113
+> db.students.insert({name:" Alaa", home_state:" Nablus", lucky_number:13, birthday: {month: 3, day: 25, year: 1995}})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({name:"Yousef", home_state:" Nablus", lucky_number:3, birthday: {month:6, day: 65, year: 1965}})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({name:"Khalil", home_state:" ramallah", lucky_number:6, birthday: {month:9, day: 35, year: 1965}})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({name:"Moath", home_state:" ramallah", lucky_number:77, birthday: {month:5, day: 45, year: 1945}})
+WriteResult({ "nInserted" : 1 })
+> db.students.find().pretty()
+{
+        "_id" : ObjectId("610113357b41a25a35deeb0f"),
+        "name" : " Alaa",
+        "home_state" : " Nablus",
+        "lucky_number" : 13,
+        "birthday" : {
+                "month" : 3,
+                "day" : 25,
+                "year" : 1995
+        }
+}
+{
+        "_id" : ObjectId("610113687b41a25a35deeb10"),
+        "name" : "Yousef",
+        "home_state" : " Nablus",
+        "lucky_number" : 3,
+        "birthday" : {
+                "month" : 6,
+                "day" : 65,
+                "year" : 1965
+        }
+}
+{
+        "_id" : ObjectId("6101138c7b41a25a35deeb11"),
+        "name" : "Khalil",
+        "home_state" : " ramallah",
+        "lucky_number" : 6,
+        "birthday" : {
+                "month" : 9,
+                "day" : 35,
+                "year" : 1965
+        }
+}
+{
+        "_id" : ObjectId("610113b27b41a25a35deeb12"),
+        "name" : "Moath",
+        "home_state" : " ramallah",
+        "lucky_number" : 77,
+        "birthday" : {
+                "month" : 5,
+                "day" : 45,
+                "year" : 1945
+        }
+}
+> db.students.find({city:"Nablus"})
+> db.students.find({home_state:"Nablus"})
+> db.students.find({   "home_state" : " Nablus",})
+{ "_id" : ObjectId("610113357b41a25a35deeb0f"), "name" : " Alaa", "home_state" : " Nablus", "lucky_number" : 13, "birthday" : { "month" : 3, "day" : 25, "year" : 1995 } }
+{ "_id" : ObjectId("610113687b41a25a35deeb10"), "name" : "Yousef", "home_state" : " Nablus", "lucky_number" : 3, "birthday" : { "month" : 6, "day" : 65, "year" : 1965 } }
+> db.students.find({   "home_state" : " Nablus",}).petty()
+uncaught exception: TypeError: db.students.find(...).petty is not a function :
+@(shell):1:1
+> db.students.find({   "home_state" : " Nablus",}).pretty()
+{
+        "_id" : ObjectId("610113357b41a25a35deeb0f"),
+        "name" : " Alaa",
+        "home_state" : " Nablus",
+        "lucky_number" : 13,
+        "birthday" : {
+                "month" : 3,
+                "day" : 25,
+                "year" : 1995
+        }
+}
+{
+        "_id" : ObjectId("610113687b41a25a35deeb10"),
+        "name" : "Yousef",
+        "home_state" : " Nablus",
+        "lucky_number" : 3,
+        "birthday" : {
+                "month" : 6,
+                "day" : 65,
+                "year" : 1965
+        }
+}
+> db.students.find({})
+{ "_id" : ObjectId("610113357b41a25a35deeb0f"), "name" : " Alaa", "home_state" : " Nablus", "lucky_number" : 13, "birthday" : { "month" : 3, "day" : 25, "year" : 1995 } }
+{ "_id" : ObjectId("610113687b41a25a35deeb10"), "name" : "Yousef", "home_state" : " Nablus", "lucky_number" : 3, "birthday" : { "month" : 6, "day" : 65, "year" : 1965 } }
+{ "_id" : ObjectId("6101138c7b41a25a35deeb11"), "name" : "Khalil", "home_state" : " ramallah", "lucky_number" : 6, "birthday" : { "month" : 9, "day" : 35, "year" : 1965 } }
+{ "_id" : ObjectId("610113b27b41a25a35deeb12"), "name" : "Moath", "home_state" : " ramallah", "lucky_number" : 77, "birthday" : { "month" : 5, "day" : 45, "year" : 1945 } }
+>
+................................
+switched to db my_first_db
+> db.students.find()
+{ "_id" : ObjectId("610113357b41a25a35deeb0f"), "name" : " Alaa", "home_state" : " Nablus", "lucky_number" : 13, "birthday" : { "month" : 3, "day" : 25, "year" : 1995 } }
+{ "_id" : ObjectId("610113687b41a25a35deeb10"), "name" : "Yousef", "home_state" : " Nablus", "lucky_number" : 3, "birthday" : { "month" : 6, "day" : 65, "year" : 1965 } }
+{ "_id" : ObjectId("6101138c7b41a25a35deeb11"), "name" : "Khalil", "home_state" : " ramallah", "lucky_number" : 6, "birthday" : { "month" : 9, "day" : 35, "year" : 1965 } }
+{ "_id" : ObjectId("610113b27b41a25a35deeb12"), "name" : "Moath", "home_state" : " ramallah", "lucky_number" : 77, "birthday" : { "month" : 5, "day" : 45, "year" : 1945 } }
+> db.students.find({"lucky_number" : {$gt:15}})
+{ "_id" : ObjectId("610113b27b41a25a35deeb12"), "name" : "Moath", "home_state" : " ramallah", "lucky_number" : 77, "birthday" : { "month" : 5, "day" : 45, "year" : 1945 } }
+> db.students.find({"lucky_number" : {$lte:55}}).pretty()
+{
+        "_id" : ObjectId("610113357b41a25a35deeb0f"),
+        "name" : " Alaa",
+        "home_state" : " Nablus",
+        "lucky_number" : 13,
+        "birthday" : {
+                "month" : 3,
+                "day" : 25,
+                "year" : 1995
+        }
+}
+{
+        "_id" : ObjectId("610113687b41a25a35deeb10"),
+        "name" : "Yousef",
+        "home_state" : " Nablus",
+        "lucky_number" : 3,
+        "birthday" : {
+                "month" : 6,
+                "day" : 65,
+                "year" : 1965
+        }
+}
+{
+        "_id" : ObjectId("6101138c7b41a25a35deeb11"),
+        "name" : "Khalil",
+        "home_state" : " ramallah",
+        "lucky_number" : 6,
+        "birthday" : {
+                "month" : 9,
+                "day" : 35,
+                "year" : 1965
+        }
+}
+> db.students.find({"lucky_number" : {$and[{$gte:10}{$lte:50}]}}).pretty()
+uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:40
+> db.students.find({"lucky_number" : {$and:[{$gte:10}{$lte:50}]}}).pretty()
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:51
+> db.students.find({"lucky_number" : {$and:[{$gte:10},{$lte:50}]}}).pretty()
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "unknown operator: $and",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+> db.students.find({"lucky_number" : {$gte:15, $lte:55}})
+> db.students.find({"lucky_number" : {$gte:1, $lte:55}})
+{ "_id" : ObjectId("610113357b41a25a35deeb0f"), "name" : " Alaa", "home_state" : " Nablus", "lucky_number" : 13, "birthday" : { "month" : 3, "day" : 25, "year" : 1995 } }
+{ "_id" : ObjectId("610113687b41a25a35deeb10"), "name" : "Yousef", "home_state" : " Nablus", "lucky_number" : 3, "birthday" : { "month" : 6, "day" : 65, "year" : 1965 } }
+{ "_id" : ObjectId("6101138c7b41a25a35deeb11"), "name" : "Khalil", "home_state" : " ramallah", "lucky_number" : 6, "birthday" : { "month" : 9, "day" : 35, "year" : 1965 } }
+> db.students.find({"lucky_number" : {$gte:1, $lte:55}, name: "Yousef"})
+{ "_id" : ObjectId("610113687b41a25a35deeb10"), "name" : "Yousef", "home_state" : " Nablus", "lucky_number" : 3, "birthday" : { "month" : 6, "day" : 65, "year" : 1965 } }
+> db.students.update({},{$set:{interests:["brunch","MongoDb]},{multi:true})
+uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shell):1:73
+> db.students.update({},{$set:{interests:["brunch","MongoDb]}},{multi:true})
+uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shell):1:74
+> db.students.update({},{$set:{"interests":["brunch","MongoDb]}},{multi:true})
+uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shell):1:76
+> db.students.update({},{$set:{"interests":["brunch","MongoDb]}},{multi:true})
+uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shell):1:76
+> db.students.update({},{$set:{"interests":["brunch","MongoDb]}},{multi:true})}
+uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shell):1:77
+> db.students.update({},{$set:{"interests":["brunch","MongoDb]}},{multi:true}})
+uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shell):1:77
+> db.students.updateMany({},{$set:{"interests":["brunch","MongoDb]}})
+uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shell):1:67
+> db.students.updateMany({},{$set:{interests:["brunch","MongoDb]}})
+uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shell):1:65
+> db.students.updateMany({},{$set:{interests:["brunch","MongoDb]}})
+uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shell):1:65
+> db.students.updateMany({},{$set:{interests:["brunch","MongoDb]}})
+uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shell):1:65
+> db
+my_first_db
+> db.students.find()
+{ "_id" : ObjectId("610113357b41a25a35deeb0f"), "name" : " Alaa", "home_state" : " Nablus", "lucky_number" : 13, "birthday" : { "month" : 3, "day" : 25, "year" : 1995 } }
+{ "_id" : ObjectId("610113687b41a25a35deeb10"), "name" : "Yousef", "home_state" : " Nablus", "lucky_number" : 3, "birthday" : { "month" : 6, "day" : 65, "year" : 1965 } }
+{ "_id" : ObjectId("6101138c7b41a25a35deeb11"), "name" : "Khalil", "home_state" : " ramallah", "lucky_number" : 6, "birthday" : { "month" : 9, "day" : 35, "year" : 1965 } }
+{ "_id" : ObjectId("610113b27b41a25a35deeb12"), "name" : "Moath", "home_state" : " ramallah", "lucky_number" : 77, "birthday" : { "month" : 5, "day" : 45, "year" : 1945 } }
+> db.students.updateMany({},{$set:{interests:["brunch","MongoDb]}})
+uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shell):1:65
+> db.students.updateMany({name: "Alaa"},{$set:{interests:["brunch","MongoDb]}})
+uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shell):1:77
+> db.students.updateMany({},{$set:{interests:["brunch","MongoDb,"xyz"]}})
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:63
+> db.students.updateMany({},{$set:{interests:["brunch","Mongob,"xyz"]}})
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:62
+> db.students.updateMany({},{$set:{interests:["brunch","Mongob,"xyz"]]}})
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:62
+> db.students.updateMany({},{$set:{interests:["brunch","Mongob,"xyz"]}})
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:62
+> db.students.updateMany({},{$set: {interests: ["coding","brunch","MongoDB"]}})
+{ "acknowledged" : true, "matchedCount" : 4, "modifiedCount" : 4 }
+> db.students.updateMany({},{$set:{interests:["brunch","Mongob,"xyz"]}})
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:62
+> db.students.updateMany({},{$set: {interests: ["coding","brunch","MongoDB"]}})
+{ "acknowledged" : true, "matchedCount" : 4, "modifiedCount" : 0 }
+> db.students.updateMany({},{$set:{interests:["brunch","Mongob,"xyz"]}})
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:62
+> db.students.updateMany({},{$set: {interests: ["coding","brunch","MongoDB"]}})
+{ "acknowledged" : true, "matchedCount" : 4, "modifiedCount" : 0 }
+> db.students.updateMany({},{$set:{interests:["brunch","Mongob,"xyz"]}})
