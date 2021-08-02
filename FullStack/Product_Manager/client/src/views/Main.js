@@ -13,11 +13,14 @@ const Main = () => {
             setLoaded(true);});
   },[])
     
+  const removeProduct = (id) => {
+    setProduct(product.filter(product => product._id != id));
+}
     return (
       <>
       <Form />
       <br></br>
-      {loaded && <List product={product}/>}
+      {loaded && <List product={product} removeProduct={removeProduct}/>}
     
       </>
     )
