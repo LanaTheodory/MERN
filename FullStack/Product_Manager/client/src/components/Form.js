@@ -33,7 +33,7 @@ const Form = () => {
                 <label>Description</label><br/>
                 <input type="textarea" onChange={(e)=>setDesc(e.target.value)} value={discription}/>
             </p>
-            <input type="submit"/>
+            <button>Submit </button>
         </form>
     )
 }
