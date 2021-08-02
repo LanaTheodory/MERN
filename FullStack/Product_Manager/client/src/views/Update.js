@@ -1,6 +1,7 @@
 import React, {useState , useEffect} from 'react'
 import { Link } from '@reach/router'
 import axios from 'axios'
+import { navigate } from '@reach/router'
 
 
 const Update = (props) => {
@@ -26,6 +27,8 @@ const Update = (props) => {
             price
         })
             .then(res => console.log(res));
+            navigate('/product')
+            
     }
     return (
         <div>
@@ -33,11 +36,15 @@ const Update = (props) => {
             <form onSubmit={handelSubmit}>
                 <p>
                     <label>Title</label><br />
-                    <input type="text" name="title" value={title} onChange={(e) => { setTitle(e.target.value) }} />
+                    <input type="text" name="title"  onChange={(e) => { setTitle(e.target.value) }} />
+                </p>
+                <p>
+                    <label>Price</label><br />
+                    <input type="text" name="price"  onChange={(e) => { setPrice(e.target.value) }} />
                 </p>
                 <p>
                     <label>Description</label><br /> <input type="text" name="description"
-                    value={discription} 
+                 
                     onChange={(e) => { setDiscription(e.target.value) }} />
                 </p>
                 <input type="submit" />

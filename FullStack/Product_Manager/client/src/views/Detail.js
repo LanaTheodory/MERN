@@ -13,7 +13,7 @@ const Detail = (props) => {
             <h1>Tittle: {product.title}</h1>
             <h2>Description: {product.discription}</h2>
             <h2>Price: {product.price}</h2>
-            <Link to={"/people/" + product._id + "/edit"}>
+            <Link to={"/product/" + product._id + "/edit"}>
     Edit
 </Link>
 

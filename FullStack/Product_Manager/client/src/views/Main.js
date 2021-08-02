@@ -11,7 +11,7 @@ const Main = () => {
           .then(response=>{
             setProduct(response.data); 
             setLoaded(true);});
-  },[])
+  },[product])
     
   const removeProduct = (id) => {
     setProduct(product.filter(product => product._id != id));

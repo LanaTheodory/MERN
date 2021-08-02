@@ -3,10 +3,10 @@ import axios from 'axios'
 import React from 'react'
 
 const List = (props) => {
-
-    const deleteProduct = (id) => {
-        axios.delete("http://localHost:8000/api/product/" + props.id)
-        .then(res => props.removeProduct(id) )
+    const {removeProduct} = props;
+    const deleteProduct = (idd) => {
+        axios.delete("http://localHost:8000/api/product/" + idd)
+        .then(res => {removeProduct(idd) })
     }
     return (
         <div>
