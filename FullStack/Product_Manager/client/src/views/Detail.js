@@ -7,7 +7,7 @@ const Detail = (props) => {
     useEffect(() => {
         axios.get("http://localhost:8000/api/product/" + props.id)
         .then(res => setProduct(res.data))
-    }, [])
+    }, [props.id])
     return (
         <div>
             <h1>Tittle: {product.title}</h1>

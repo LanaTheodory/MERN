@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Form from '../components/Form';
 import List from '../components/List';
-const Main = () => {
+
+const Main = (props) => {
 
   const [product, setProduct] = useState([]);
   const [loaded, setLoaded] = useState(false);
@@ -11,18 +12,24 @@ const Main = () => {
           .then(response=>{
             setProduct(response.data); 
             setLoaded(true);});
-  },[product])
+  },[])
     
   const removeProduct = (id) => {
     setProduct(product.filter(product => product._id != id));
 }
+const createProduct = productt => {
+  axios.post('http://localhost:8000/api/product', productt)
+      .then(res=>{
+          setProduct([...product, res.data]);
+      })
+}
     return (
-      <>
-      <Form />
+      <div>
+      <Form title="" discription="" price="" formSubmit={createProduct} />
       <br></br>
       {loaded && <List product={product} removeProduct={removeProduct}/>}
     
-      </>
+      </div>
     )
 }
 export default Main;
