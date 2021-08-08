@@ -7,6 +7,7 @@ const Main = (props) => {
 
   const [product, setProduct] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  
   useEffect(()=>{
       axios.get('http://localhost:8000/api/product')
           .then(response=>{

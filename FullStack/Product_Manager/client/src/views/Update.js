@@ -24,15 +24,17 @@ const Update = (props) => {
     }, [id])
 
     const handelSubmit = (productt) => {
-       // e.preventDefault();
+   
         axios.put('http://localhost:8000/api/product/' + id, productt)
             .then(res => console.log(res));
             navigate('/product')
             
     }
+
+    
     return (
         <div>
-            <h1>Update a Person</h1>
+            <h1>Update a Product</h1>
 
            {loaded && <Form title={title}
                    price ={price}
@@ -40,7 +42,7 @@ const Update = (props) => {
                    formSubmit={handelSubmit}></Form>
 
     }
-              <Button id={id} value={"go back"}successCallback={()=>navigate("/product")}/>
+              <Button  value={"go back"} successCallback={()=>navigate("/product")}/>
         </div>
     )
 }
